@@ -5,12 +5,14 @@
 
     self.LoadSongs = function () {
         loadSongsViaAjax(function (data) {
+            
             ko.mapping.fromJS(data, {}, self.Songs);
         });
     };
 
-    self.AddSong = function () {
-    };
+    self.RunningSongCount = ko.computed(function () {
+        return self.Songs().length + ' songs in collection';
+    });
 
     var loadSongsViaAjax = function (successCallback) {
         $.ajax({

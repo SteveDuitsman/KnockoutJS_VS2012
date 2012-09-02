@@ -2,16 +2,9 @@
     var self = this;
 
     self.Songs = ko.observableArray();
-    self.NewSong = new SongModel();
-
-    self.LoadSongs = function () {
-        loadSongsViaAjax(function (data) {
-            ko.mapping.fromJS(data, {}, self.Songs);
-        });
-    };
-
     self.AddingNewSong = ko.observable(false);
-
+    self.NewSong = new SongModel();
+    
     self.ShowAddSongForm = function () {
         self.AddingNewSong(!self.AddingNewSong());
     };
@@ -34,6 +27,16 @@
             }
         });
     };
+
+    self.LoadSongs = function () {
+        loadSongsViaAjax(function (data) {
+            ko.mapping.fromJS(data, {}, self.Songs);
+        });
+    };
+
+    self.RunningSongCount = ko.computed(function () {
+        return self.Songs().length + ' songs in collection';
+    });
 
     var loadSongsViaAjax = function (successCallback) {
         $.ajax({

@@ -6,15 +6,19 @@
     <script src="~/Scripts/AjaxBinding/AjaxMappingViewModel.js"></script>
 }
 <h2>SongList</h2>
-
-<input type="button" data-bind="click: LoadSongs" value="Load Songs" />
+<div>
+    <input type="button" data-bind="click: LoadSongs" value="Load Songs" />
+</div>
+<div>
+    <span data-bind="text: RunningSongCount()"></span>
+</div>
 <div>
     <table>
         <thead>
             <tr>
-                <th>title</th>
-                <th>artist</th>
-                <th>duration</th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Duration</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: Songs">
@@ -22,7 +26,7 @@
                 <td><span data-bind="text: Title"></span></td>
                 <td><span data-bind="text: Artist"></span></td>
                 <td>
-@*                    <span data-bind="text: Duration.Hours"></span>h&nbsp;
+                    @*                    <span data-bind="text: Duration.Hours"></span>h&nbsp;
                     <span data-bind="text: Duration.Minutes"></span>m&nbsp;
                     <span data-bind="text: Duration.Seconds"></span>s*@
                 </td>
