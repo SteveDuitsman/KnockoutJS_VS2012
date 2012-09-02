@@ -15,16 +15,12 @@
     <br />
 </div>
 
-<div>
-    <pre data-bind="text: JSON.stringify(ko.toJS($data), null, 2)"></pre>
-</div>
-
 <script type="text/javascript">
     function ClickToEditViewModel() {
         var self = this;
 
-        self.Title = ko.observable('chicken dance');
-        self.Artist = ko.observable('who knows');
+        self.Title = ko.observable('Chicken Dance');
+        self.Artist = ko.observable('Werner Thomas');
 
         self.IsEditing = ko.observable(false);
 

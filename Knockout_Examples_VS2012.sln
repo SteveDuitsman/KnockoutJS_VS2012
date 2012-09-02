@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knockout_Examples_VS2012", "MvcApplication1\Knockout_Examples_VS2012.csproj", "{33B030DC-65F5-4B4A-8165-8AF4259B867D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knockout_Examples_VS2012", "Knockout_Examples_VS2012\Knockout_Examples_VS2012.csproj", "{33B030DC-65F5-4B4A-8165-8AF4259B867D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

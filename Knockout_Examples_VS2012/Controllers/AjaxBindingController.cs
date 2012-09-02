@@ -37,7 +37,7 @@ namespace MvcApplication1.Controllers
         private IEnumerable<Song> songs = new List<Song> {
             new Song { Id = 1, Title = "Mama said knock you out", Artist = "LL Cool J"/*, Duration = new TimeSpan(0, 3, 49 )*/},
             new Song { Id = 2, Title = "Rope", Artist = "Foo Fighters"/*,Duration = new TimeSpan(0, 4, 19 )*/},
-            new Song { Id = 3, Title = "Big Lodi", Artist = "DJ X The Owl"/*,Duration = new TimeSpan(1, 3, 0 )*/},
+            new Song { Id = 3, Title = "Chicken Dance", Artist = "Werner Thomas"/*,Duration = new TimeSpan(1, 3, 0 )*/},
         };
 
         [HttpGet]
