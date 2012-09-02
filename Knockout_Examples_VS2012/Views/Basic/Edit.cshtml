@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div>
+    <b>Title:</b>
+    <input type="text" data-bind="value: Title" />
+    <br />
+    <b>Artist:</b>
+    <input type="text" data-bind="value: Artist" />
+    <br />
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var viewModel = {
+            Title: ko.observable('chicken dance'),
+            Artist: ko.observable('who knows'),
+        };
+        ko.applyBindings(viewModel);
+    });
+</script>

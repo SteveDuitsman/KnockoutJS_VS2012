@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "SongList";
+}
+@section scripts{
+    <script src="~/Scripts/knockout.mapping-latest.debug.js"></script>
+    <script src="~/Scripts/AjaxBinding/AjaxMappingViewModel.js"></script>
+}
+<h2>SongList</h2>
+
+<input type="button" data-bind="click: LoadSongs" value="Load Songs" />
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>artist</th>
+                <th>duration</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: Songs">
+            <tr>
+                <td><span data-bind="text: Title"></span></td>
+                <td><span data-bind="text: Artist"></span></td>
+                <td>
+@*                    <span data-bind="text: Duration.Hours"></span>h&nbsp;
+                    <span data-bind="text: Duration.Minutes"></span>m&nbsp;
+                    <span data-bind="text: Duration.Seconds"></span>s*@
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var loadurl = '@Url.Action("LoadSongs", "AjaxBinding")';
+        var viewModel = new AjaxMappingViewModel({ LoadUrl: loadurl });
+        ko.applyBindings(viewModel);
+    });
+</script>

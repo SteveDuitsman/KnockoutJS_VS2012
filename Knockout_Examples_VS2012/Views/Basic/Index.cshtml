@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Index (Knockout)";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <b>Title:</b>
+    <span data-bind="text: Title"></span>
+    <br />
+    <b>Artist:</b>
+    <span data-bind="text: Artist"></span>
+    <br />
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var viewModel = {
+            Title: ko.observable('Chicken Dance'),
+            Artist: ko.observable('Werner Thomas'),
+        };
+        ko.applyBindings(viewModel);
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*    <b>Title:</b>
+    <span data-bind="text: Title"></span>
+    <br />
+    <b>Artist:</b>
+    <span data-bind="text: Artist"></span>
+    <br />*@

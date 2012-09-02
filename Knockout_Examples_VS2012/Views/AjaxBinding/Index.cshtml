@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/AjaxBinding/AjaxBindingViewModel.js"></script>
+
+<h2>Index</h2>
+<input type="button" data-bind="click: LoadSongs" value="Load Songs"  />
+<div>
+    <span data-bind="text: Title"></span>
+    <br />
+    <span data-bind="text: Artist"></span>
+    <br />
+    <span data-bind="text: Duration"></span>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var loadurl = '@Url.Action("LoadSongs", "AjaxBinding", new { id = 1 })';
+        var viewModel = new AjaxBindingViewModel(loadurl);
+        ko.applyBindings(viewModel);
+    });
+</script>

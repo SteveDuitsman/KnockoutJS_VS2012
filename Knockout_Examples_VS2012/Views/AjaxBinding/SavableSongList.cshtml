@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "SavableSongList";
+}
+@section scripts{
+    <script src="~/Scripts/knockout.mapping-latest.debug.js"></script>
+    <script src="~/Scripts/AjaxBinding/AjaxMappingSavableViewModel.js"></script>
+    <script src="~/Scripts/Models/SongModel.js"></script>
+}
+<h2>SavableSongList</h2>
+
+<input type="button" data-bind="click: ShowAddSongForm" value="Add Song" />
+<div class="newSongForm" data-bind="visible: AddingNewSong, with: NewSong">
+    <b>Title:</b>
+    <input data-bind="value: Title" />
+    <b>Artist:</b>
+    <input data-bind="value: Artist" />
+    <input type="button" data-bind="click: $parent.AddSong" value="Save" />
+</div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>artist</th>
+                <th>duration</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: Songs">
+            <tr>
+                <td><span data-bind="text: Title"></span></td>
+                <td><span data-bind="text: Artist"></span></td>
+                <td>
+@*                    <span data-bind="text: Duration.Hours"></span>h&nbsp;
+                    <span data-bind="text: Duration.Minutes"></span>m&nbsp;
+                    <span data-bind="text: Duration.Seconds"></span>s*@
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="button" data-bind="click: SaveSong" value="Save Song List" />
+</div>
+<div>
+    <pre data-bind="text: JSON.stringify(ko.toJS($data), null, 2)"></pre>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var loadurl = '@Url.Action("LoadSongs", "AjaxBinding")';
+        var saveurl = '@Url.Action("SaveSongList", "AjaxBinding")';
+        var viewModel = new AjaxMappingSavableViewModel({
+            LoadUrl: loadurl,
+            SaveUrl: saveurl
+        });
+        ko.applyBindings(viewModel);
+        viewModel.LoadSongs();
+    });
+</script>

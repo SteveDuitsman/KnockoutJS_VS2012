@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "ClickToEdit";
+}
+
+<h2>ClickToEdit</h2>
+
+<div data-bind="click: Edit">
+    <b>Title:</b>
+    <span data-bind="visible: !IsEditing(),text: Title"></span>
+    <input type="text" data-bind="visible: IsEditing, value: Title" />
+    <br />
+    <b>Artist:</b>
+    <span data-bind="visible: !IsEditing(), text: Artist"></span>
+    <input type="text" data-bind="visible: IsEditing, value: Artist" />
+    <br />
+</div>
+
+<div>
+    <pre data-bind="text: JSON.stringify(ko.toJS($data), null, 2)"></pre>
+</div>
+
+<script type="text/javascript">
+    function ClickToEditViewModel() {
+        var self = this;
+
+        self.Title = ko.observable('chicken dance');
+        self.Artist = ko.observable('who knows');
+
+        self.IsEditing = ko.observable(false);
+
+        self.Edit = function () {
+            self.IsEditing(true);
+        };
+    };
+
+    $(document).ready(function () {
+        ko.applyBindings(new ClickToEditViewModel());
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*    <b>Title:</b>
+    <span data-bind="text: Title"></span>
+    <br />
+    <b>Artist:</b>
+    <span data-bind="text: Artist"></span>
+    <br />*@
