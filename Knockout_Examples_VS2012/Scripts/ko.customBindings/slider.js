@@ -10,9 +10,10 @@
         $(element).slider(options);
 
 
-        ko.utils.registerEventHandler(element, "change", function () {
+        ko.utils.registerEventHandler(element, "slidechange", function () {
             var observable = valueAccessor();
-            observable($(element).slider("option", "value"));
+            var value = $(element).slider("option", "value");
+            observable(value);
         });
     },
     update: function (element, valueAccessor) {

@@ -16,20 +16,37 @@
 
 <input type="button" data-bind="click: ShowAddSongForm" value="Add Song" />
 <div class="newSongForm" data-bind="slideVisible: AddingNewSong, with: NewSong">
-    <b>Title:</b>
-    <input data-bind="value: Title" />
-    <b>Artist:</b>
-    <input data-bind="value: Artist" />
-    <b>Length:</b>
-    <!-- ko with: Length -->
-        <b>Hours:</b>
-        <div data-bind="slider: Hours, sliderOptions: { min: 0, max: 24}"></div>
-        <b>Minutes:</b>
-        <div data-bind="slider: Minutes, sliderOptions: { min: 0, max: 59}"></div>
-        <b>Seconds:</b>
-        <div data-bind="slider: Seconds, sliderOptions: { min: 0, max: 59}"></div>
-    <!-- /ko -->
-    <input type="button" data-bind="click: $parent.AddSong" value="Save" />
+    <dl>
+        <dt>
+            <b>Title:</b>
+            <input data-bind="value: Title" />
+        </dt>
+        <dt>
+            <b>Artist:</b>
+            <input data-bind="value: Artist" />
+        </dt>
+        <dt>
+            <b>Length:</b>
+        </dt>
+        <!-- ko with: Length -->
+        <dt>
+            
+            <span data-bind="text: Hours"></span><b>h</b>
+            <div data-bind="slider: Hours, sliderOptions: { min: 0, max: 24}"></div>
+        </dt>
+        <dt>
+            <span data-bind="text: Minutes"></span><b>m</b>
+            <div data-bind="slider: Minutes, sliderOptions: { min: 0, max: 59}"></div>
+        </dt>
+        <dt>
+            <span data-bind="text: Seconds"></span><b>s</b>
+            <div data-bind="slider: Seconds, sliderOptions: { min: 0, max: 59}"></div>
+        </dt>
+        <!-- /ko -->
+        <dt>
+            <input type="button" data-bind="click: $parent.AddSong" value="Save" />
+        </dt>
+    </dl>
 </div>
 <div>
     <table>
