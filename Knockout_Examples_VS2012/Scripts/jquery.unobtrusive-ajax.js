@@ -63,7 +63,7 @@
     }
 
     function asyncRequest(element, options) {
-        var confirm, loading, method, duration;
+        var confirm, loading, method, Length;
 
         confirm = element.getAttribute("data-ajax-confirm");
         if (confirm && !window.confirm(confirm)) {
@@ -71,7 +71,7 @@
         }
 
         loading = $(element.getAttribute("data-ajax-loading"));
-        duration = element.getAttribute("data-ajax-loading-duration") || 0;
+        Length = element.getAttribute("data-ajax-loading-Length") || 0;
 
         $.extend(options, {
             type: element.getAttribute("data-ajax-method") || undefined,
@@ -81,12 +81,12 @@
                 asyncOnBeforeSend(xhr, method);
                 result = getFunction(element.getAttribute("data-ajax-begin"), ["xhr"]).apply(this, arguments);
                 if (result !== false) {
-                    loading.show(duration);
+                    loading.show(Length);
                 }
                 return result;
             },
             complete: function () {
-                loading.hide(duration);
+                loading.hide(Length);
                 getFunction(element.getAttribute("data-ajax-complete"), ["xhr", "status"]).apply(this, arguments);
             },
             success: function (data, status, xhr) {

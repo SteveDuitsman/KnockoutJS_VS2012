@@ -751,7 +751,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		opacity: false,
 		refreshPositions: false,
 		revert: false,
-		revertDuration: 500,
+		revertLength: 500,
 		scope: "default",
 		scroll: true,
 		scrollSensitivity: 20,
@@ -940,7 +940,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 
 		if((this.options.revert == "invalid" && !dropped) || (this.options.revert == "valid" && dropped) || this.options.revert === true || ($.isFunction(this.options.revert) && this.options.revert.call(this.element, dropped))) {
 			var self = this;
-			$(this.helper).animate(this.originalPosition, parseInt(this.options.revertDuration, 10), function() {
+			$(this.helper).animate(this.originalPosition, parseInt(this.options.revertLength, 10), function() {
 				if(self._trigger("stop", event) !== false) {
 					self._clear();
 				}
@@ -1839,7 +1839,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 	options: {
 		alsoResize: false,
 		animate: false,
-		animateDuration: "slow",
+		animateLength: "slow",
 		animateEasing: "swing",
 		aspectRatio: false,
 		autoHide: false,
@@ -2440,7 +2440,7 @@ $.ui.plugin.add("resizable", "animate", {
 
 		self.element.animate(
 			$.extend(style, top && left ? { top: top, left: left } : {}), {
-				duration: o.animateDuration,
+				Length: o.animateLength,
 				easing: o.animateEasing,
 				step: function() {
 
@@ -4166,7 +4166,7 @@ function styleDifference(oldStyle, newStyle) {
 	return diff;
 }
 
-$.effects.animateClass = function(value, duration, easing, callback) {
+$.effects.animateClass = function(value, Length, easing, callback) {
 	if ($.isFunction(easing)) {
 		callback = easing;
 		easing = null;
@@ -4189,7 +4189,7 @@ $.effects.animateClass = function(value, duration, easing, callback) {
 
 		that.animate(styleDifference(originalStyle, newStyle), {
 			queue: false,
-			duration: duration,
+			Length: Length,
 			easing: easing,
 			complete: function() {
 				$.each(classAnimationActions, function(i, action) {
@@ -4393,7 +4393,7 @@ function _normalizeArguments(effect, options, speed, callback) {
 
 	options = options || {};
 
-	speed = speed || options.duration;
+	speed = speed || options.Length;
 	speed = $.fx.off ? 0 : typeof speed == 'number'
 		? speed : speed in $.fx.speeds ? $.fx.speeds[speed] : $.fx.speeds._default;
 
@@ -4422,7 +4422,7 @@ $.fn.extend({
 			// TODO: make effects take actual parameters instead of a hash
 			args2 = {
 				options: args[1],
-				duration: args[2],
+				Length: args[2],
 				callback: args[3]
 			},
 			mode = args2.options.mode,
@@ -4431,7 +4431,7 @@ $.fn.extend({
 		if ( $.fx.off || !effectMethod ) {
 			// delegate to the original method (e.g., .show()) if possible
 			if ( mode ) {
-				return this[ mode ]( args2.duration, args2.callback );
+				return this[ mode ]( args2.Length, args2.callback );
 			} else {
 				return this.each(function() {
 					if ( args2.callback ) {
@@ -4532,7 +4532,7 @@ $.fn.extend({
  *
 */
 
-// t: current time, b: begInnIng value, c: change In value, d: duration
+// t: current time, b: begInnIng value, c: change In value, d: Length
 $.easing.jswing = $.easing.swing;
 
 $.extend($.easing,
@@ -4728,7 +4728,7 @@ $.effects.blind = function(o) {
 		animation[ref] = mode == 'show' ? distance : 0;
 
 		// Animate
-		wrapper.animate(animation, o.duration, o.options.easing, function() {
+		wrapper.animate(animation, o.Length, o.options.easing, function() {
 			if(mode == 'hide') el.hide(); // Hide
 			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
 			if(o.callback) o.callback.apply(el[0], arguments); // Callback
@@ -4755,7 +4755,7 @@ $.effects.bounce = function(o) {
 		var direction = o.options.direction || 'up'; // Default direction
 		var distance = o.options.distance || 20; // Default distance
 		var times = o.options.times || 5; // Default # of times
-		var speed = o.duration || 250; // Default speed per bounce
+		var speed = o.Length || 250; // Default speed per bounce
 		if (/show|hide/.test(mode)) props.push('opacity'); // Avoid touching opacity to prevent clearType and PNG issues in IE
 
 		// Adjust
@@ -4838,7 +4838,7 @@ $.effects.clip = function(o) {
 		animation[ref.position] = mode == 'show' ? 0 : distance / 2;
 
 		// Animate
-		animate.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
+		animate.animate(animation, { queue: false, Length: o.Length, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') el.hide(); // Hide
 			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
 			if(o.callback) o.callback.apply(el[0], arguments); // Callback
@@ -4877,7 +4877,7 @@ $.effects.drop = function(o) {
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 
 		// Animate
-		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
+		el.animate(animation, { queue: false, Length: o.Length, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') el.hide(); // Hide
 			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
 			if(o.callback) o.callback.apply(this, arguments); // Callback
@@ -4936,7 +4936,7 @@ $.effects.explode = function(o) {
 					left: offset.left + j*(width/cells) + (o.options.mode == 'show' ? 0 : (j-Math.floor(cells/2))*(width/cells)),
 					top: offset.top + i*(height/rows) + (o.options.mode == 'show' ? 0 : (i-Math.floor(rows/2))*(height/rows)),
 					opacity: o.options.mode == 'show' ? 1 : 0
-				}, o.duration || 500);
+				}, o.Length || 500);
 		}
 	}
 
@@ -4949,7 +4949,7 @@ $.effects.explode = function(o) {
 
 				$('div.ui-effects-explode').remove();
 
-	}, o.duration || 500);
+	}, o.Length || 500);
 
 
 	});
@@ -4967,7 +4967,7 @@ $.effects.fade = function(o) {
 
 		elem.animate({ opacity: mode }, {
 			queue: false,
-			duration: o.duration,
+			Length: o.Length,
 			easing: o.options.easing,
 			complete: function() {
 				(o.callback && o.callback.apply(this, arguments));
@@ -4992,7 +4992,7 @@ $.effects.fold = function(o) {
 		var mode = $.effects.setMode(el, o.options.mode || 'hide'); // Set Mode
 		var size = o.options.size || 15; // Default fold size
 		var horizFirst = !(!o.options.horizFirst); // Ensure a boolean value
-		var duration = o.duration ? o.duration / 2 : $.fx.speeds._default / 2;
+		var Length = o.Length ? o.Length / 2 : $.fx.speeds._default / 2;
 
 		// Adjust
 		$.effects.save(el, props); el.show(); // Save & Show
@@ -5010,8 +5010,8 @@ $.effects.fold = function(o) {
 		animation2[ref[1]] = mode == 'show' ? distance[1] : 0;
 
 		// Animate
-		wrapper.animate(animation1, duration, o.options.easing)
-		.animate(animation2, duration, o.options.easing, function() {
+		wrapper.animate(animation1, Length, o.options.easing)
+		.animate(animation2, Length, o.options.easing, function() {
 			if(mode == 'hide') el.hide(); // Hide
 			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
 			if(o.callback) o.callback.apply(el[0], arguments); // Callback
@@ -5048,7 +5048,7 @@ $.effects.highlight = function(o) {
 			})
 			.animate(animation, {
 				queue: false,
-				duration: o.duration,
+				Length: o.Length,
 				easing: o.options.easing,
 				complete: function() {
 					(mode == 'hide' && elem.hide());
@@ -5070,7 +5070,7 @@ $.effects.pulsate = function(o) {
 		var elem = $(this),
 			mode = $.effects.setMode(elem, o.options.mode || 'show'),
 			times = ((o.options.times || 5) * 2) - 1,
-			duration = o.duration ? o.duration / 2 : $.fx.speeds._default / 2,
+			Length = o.Length ? o.Length / 2 : $.fx.speeds._default / 2,
 			isVisible = elem.is(':visible'),
 			animateTo = 0;
 
@@ -5084,11 +5084,11 @@ $.effects.pulsate = function(o) {
 		}
 
 		for (var i = 0; i < times; i++) {
-			elem.animate({ opacity: animateTo }, duration, o.options.easing);
+			elem.animate({ opacity: animateTo }, Length, o.options.easing);
 			animateTo = (animateTo + 1) % 2;
 		}
 
-		elem.animate({ opacity: animateTo }, duration, o.options.easing, function() {
+		elem.animate({ opacity: animateTo }, Length, o.options.easing, function() {
 			if (animateTo == 0) {
 				elem.hide();
 			}
@@ -5125,7 +5125,7 @@ $.effects.puff = function(o) {
 				}
 		});
 
-		elem.effect('scale', o.options, o.duration, o.callback);
+		elem.effect('scale', o.options, o.Length, o.callback);
 		elem.dequeue();
 	});
 };
@@ -5166,7 +5166,7 @@ $.effects.scale = function(o) {
 		options.from = el.from; options.to = el.to; options.mode = mode;
 
 		// Animate
-		el.effect('size', options, o.duration, o.callback);
+		el.effect('size', options, o.Length, o.callback);
 		el.dequeue();
 	});
 
@@ -5247,14 +5247,14 @@ $.effects.size = function(o) {
 					child.to = $.effects.setTransition(child, hProps, factor.to.x, child.to);
 				};
 				child.css(child.from); // Shift children
-				child.animate(child.to, o.duration, o.options.easing, function(){
+				child.animate(child.to, o.Length, o.options.easing, function(){
 					if (restore) $.effects.restore(child, props2); // Restore children
 				}); // Animate children
 			});
 		};
 
 		// Animate
-		el.animate(el.to, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
+		el.animate(el.to, { queue: false, Length: o.Length, easing: o.options.easing, complete: function() {
 			if (el.to.opacity === 0) {
 				el.css('opacity', el.from.opacity);
 			}
@@ -5284,7 +5284,7 @@ $.effects.shake = function(o) {
 		var direction = o.options.direction || 'left'; // Default direction
 		var distance = o.options.distance || 20; // Default distance
 		var times = o.options.times || 3; // Default # of times
-		var speed = o.duration || o.options.duration || 140; // Default speed per shake
+		var speed = o.Length || o.options.Length || 140; // Default speed per shake
 
 		// Adjust
 		$.effects.save(el, props); el.show(); // Save & Show
@@ -5342,7 +5342,7 @@ $.effects.slide = function(o) {
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 
 		// Animate
-		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
+		el.animate(animation, { queue: false, Length: o.Length, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') el.hide(); // Hide
 			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
 			if(o.callback) o.callback.apply(this, arguments); // Callback
@@ -5379,7 +5379,7 @@ $.effects.transfer = function(o) {
 					width: elem.innerWidth(),
 					position: 'absolute'
 				})
-				.animate(animation, o.duration, o.options.easing, function() {
+				.animate(animation, o.Length, o.options.easing, function() {
 					transfer.remove();
 					(o.callback && o.callback.apply(elem[0], arguments));
 					elem.dequeue();
@@ -5814,20 +5814,20 @@ $.widget( "ui.accordion", {
 				options.proxied = options.animated;
 			}
 
-			if ( !options.proxiedDuration ) {
-				options.proxiedDuration = options.duration;
+			if ( !options.proxiedLength ) {
+				options.proxiedLength = options.Length;
 			}
 
 			options.animated = $.isFunction( options.proxied ) ?
 				options.proxied( animOptions ) :
 				options.proxied;
 
-			options.duration = $.isFunction( options.proxiedDuration ) ?
-				options.proxiedDuration( animOptions ) :
-				options.proxiedDuration;
+			options.Length = $.isFunction( options.proxiedLength ) ?
+				options.proxiedLength( animOptions ) :
+				options.proxiedLength;
 
 			var animations = $.ui.accordion.animations,
-				duration = options.duration,
+				Length = options.Length,
 				easing = options.animated;
 
 			if ( easing && !animations[ easing ] && !$.easing[ easing ] ) {
@@ -5837,7 +5837,7 @@ $.widget( "ui.accordion", {
 				animations[ easing ] = function( options ) {
 					this.slide( options, {
 						easing: easing,
-						duration: duration || 700
+						Length: Length || 700
 					});
 				};
 			}
@@ -5901,7 +5901,7 @@ $.extend( $.ui.accordion, {
 		slide: function( options, additions ) {
 			options = $.extend({
 				easing: "swing",
-				duration: 300
+				Length: 300
 			}, options, additions );
 			if ( !options.toHide.size() ) {
 				options.toShow.animate({
@@ -5963,7 +5963,7 @@ $.extend( $.ui.accordion, {
 						( percentDone * showProps[ settings.prop ].value )
 						+ showProps[ settings.prop ].unit;
 				},
-				duration: options.duration,
+				Length: options.Length,
 				easing: options.easing,
 				complete: function() {
 					if ( !options.autoHeight ) {
@@ -5980,7 +5980,7 @@ $.extend( $.ui.accordion, {
 		bounceslide: function( options ) {
 			this.slide( options, {
 				easing: options.down ? "easeOutBounce" : "swing",
-				duration: options.down ? 1000 : 200
+				Length: options.down ? 1000 : 200
 			});
 		}
 	}
@@ -7086,7 +7086,7 @@ function Datepicker() {
 			// string value starting with '+' for current year + value
 		minDate: null, // The earliest selectable date, or null for no limit
 		maxDate: null, // The latest selectable date, or null for no limit
-		duration: 'fast', // Duration of display/closure
+		Length: 'fast', // Length of display/closure
 		beforeShowDay: null, // Function that takes a date and returns an array with
 			// [0] = true if selectable, false if not, [1] = custom CSS class name(s) or '',
 			// [2] = cell title (optional), e.g. $.datepicker.noWeekends
@@ -7682,7 +7682,7 @@ $.extend(Datepicker.prototype, {
 			left: offset.left + 'px', top: offset.top + 'px'});
 		if (!inst.inline) {
 			var showAnim = $.datepicker._get(inst, 'showAnim');
-			var duration = $.datepicker._get(inst, 'duration');
+			var Length = $.datepicker._get(inst, 'Length');
 			var postProcess = function() {
 				var cover = inst.dpDiv.find('iframe.ui-datepicker-cover'); // IE6- only
 				if( !! cover.length ){
@@ -7694,10 +7694,10 @@ $.extend(Datepicker.prototype, {
 			inst.dpDiv.zIndex($(input).zIndex()+1);
 			$.datepicker._datepickerShowing = true;
 			if ($.effects && $.effects[showAnim])
-				inst.dpDiv.show(showAnim, $.datepicker._get(inst, 'showOptions'), duration, postProcess);
+				inst.dpDiv.show(showAnim, $.datepicker._get(inst, 'showOptions'), Length, postProcess);
 			else
-				inst.dpDiv[showAnim || 'show']((showAnim ? duration : null), postProcess);
-			if (!showAnim || !duration)
+				inst.dpDiv[showAnim || 'show']((showAnim ? Length : null), postProcess);
+			if (!showAnim || !Length)
 				postProcess();
 			if (inst.input.is(':visible') && !inst.input.is(':disabled'))
 				inst.input.focus();
@@ -7797,15 +7797,15 @@ $.extend(Datepicker.prototype, {
 			return;
 		if (this._datepickerShowing) {
 			var showAnim = this._get(inst, 'showAnim');
-			var duration = this._get(inst, 'duration');
+			var Length = this._get(inst, 'Length');
 			var postProcess = function() {
 				$.datepicker._tidyDialog(inst);
 			};
 			if ($.effects && $.effects[showAnim])
-				inst.dpDiv.hide(showAnim, $.datepicker._get(inst, 'showOptions'), duration, postProcess);
+				inst.dpDiv.hide(showAnim, $.datepicker._get(inst, 'showOptions'), Length, postProcess);
 			else
 				inst.dpDiv[(showAnim == 'slideDown' ? 'slideUp' :
-					(showAnim == 'fadeIn' ? 'fadeOut' : 'hide'))]((showAnim ? duration : null), postProcess);
+					(showAnim == 'fadeIn' ? 'fadeOut' : 'hide'))]((showAnim ? Length : null), postProcess);
 			if (!showAnim)
 				postProcess();
 			this._datepickerShowing = false;
@@ -10672,14 +10672,14 @@ $.widget( "ui.slider", $.ui.mouse, {
 							self.range.stop( 1, 1 )[ animate ? "animate" : "css" ]( { left: valPercent + "%" }, o.animate );
 						}
 						if ( i === 1 ) {
-							self.range[ animate ? "animate" : "css" ]( { width: ( valPercent - lastValPercent ) + "%" }, { queue: false, duration: o.animate } );
+							self.range[ animate ? "animate" : "css" ]( { width: ( valPercent - lastValPercent ) + "%" }, { queue: false, Length: o.animate } );
 						}
 					} else {
 						if ( i === 0 ) {
 							self.range.stop( 1, 1 )[ animate ? "animate" : "css" ]( { bottom: ( valPercent ) + "%" }, o.animate );
 						}
 						if ( i === 1 ) {
-							self.range[ animate ? "animate" : "css" ]( { height: ( valPercent - lastValPercent ) + "%" }, { queue: false, duration: o.animate } );
+							self.range[ animate ? "animate" : "css" ]( { height: ( valPercent - lastValPercent ) + "%" }, { queue: false, Length: o.animate } );
 						}
 					}
 				}
@@ -10699,13 +10699,13 @@ $.widget( "ui.slider", $.ui.mouse, {
 				this.range.stop( 1, 1 )[ animate ? "animate" : "css" ]( { width: valPercent + "%" }, o.animate );
 			}
 			if ( oRange === "max" && this.orientation === "horizontal" ) {
-				this.range[ animate ? "animate" : "css" ]( { width: ( 100 - valPercent ) + "%" }, { queue: false, duration: o.animate } );
+				this.range[ animate ? "animate" : "css" ]( { width: ( 100 - valPercent ) + "%" }, { queue: false, Length: o.animate } );
 			}
 			if ( oRange === "min" && this.orientation === "vertical" ) {
 				this.range.stop( 1, 1 )[ animate ? "animate" : "css" ]( { height: valPercent + "%" }, o.animate );
 			}
 			if ( oRange === "max" && this.orientation === "vertical" ) {
-				this.range[ animate ? "animate" : "css" ]( { height: ( 100 - valPercent ) + "%" }, { queue: false, duration: o.animate } );
+				this.range[ animate ? "animate" : "css" ]( { height: ( 100 - valPercent ) + "%" }, { queue: false, Length: o.animate } );
 			}
 		}
 	}
@@ -10742,7 +10742,7 @@ $.widget( "ui.tabs", {
 		disabled: [],
 		enable: null,
 		event: "click",
-		fx: null, // e.g. { height: 'toggle', opacity: 'toggle', duration: 200 }
+		fx: null, // e.g. { height: 'toggle', opacity: 'toggle', Length: 200 }
 		idPrefix: "ui-tabs-",
 		load: null,
 		panelTemplate: "<div></div>",
@@ -11012,7 +11012,7 @@ $.widget( "ui.tabs", {
 			? function( clicked, $show ) {
 				$( clicked ).closest( "li" ).addClass( "ui-tabs-selected ui-state-active" );
 				$show.hide().removeClass( "ui-tabs-hide" ) // avoid flicker that way
-					.animate( showFx, showFx.duration || "normal", function() {
+					.animate( showFx, showFx.Length || "normal", function() {
 						resetStyle( $show, showFx );
 						self._trigger( "show", null, self._ui( clicked, $show[ 0 ] ) );
 					});
@@ -11026,7 +11026,7 @@ $.widget( "ui.tabs", {
 		// Hide a tab, $show is optional...
 		var hideTab = hideFx
 			? function( clicked, $hide ) {
-				$hide.animate( hideFx, hideFx.duration || "normal", function() {
+				$hide.animate( hideFx, hideFx.Length || "normal", function() {
 					self.lis.removeClass( "ui-tabs-selected ui-state-active" );
 					$hide.addClass( "ui-tabs-hide" );
 					resetStyle( $hide, hideFx );

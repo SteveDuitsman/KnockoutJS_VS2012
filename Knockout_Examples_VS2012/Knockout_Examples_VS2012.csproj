@@ -238,6 +238,10 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery-ui-sliderAccess.js" />
+    <Content Include="Scripts\jquery-ui-sliderAccess.min.js" />
+    <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
+    <Content Include="Scripts\jquery-ui-timepicker-addon.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -248,6 +252,10 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\ko.customBindings\slider.js" />
+    <Content Include="Scripts\ko.customBindings\timePicker.js" />
+    <Content Include="Scripts\ko.customBindings\datePicker.js" />
+    <Content Include="Scripts\ko.customBindings\slideVisible.js" />
     <Content Include="Scripts\Models\SongModel.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\AjaxBinding\AjaxBindingViewModel.js" />
@@ -296,6 +304,7 @@
     <Content Include="Views\Basic\Edit.cshtml" />
     <Content Include="Views\AjaxBinding\SongList.cshtml" />
     <Content Include="Views\AjaxBinding\SavableSongList.cshtml" />
+    <Content Include="Views\AjaxBinding\SavableSongListWithLength.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

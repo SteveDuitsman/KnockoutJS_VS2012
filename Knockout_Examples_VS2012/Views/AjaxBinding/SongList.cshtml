@@ -18,7 +18,7 @@
             <tr>
                 <th>Title</th>
                 <th>Artist</th>
-                <th>Duration</th>
+                <th>Length</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: Songs">
@@ -26,9 +26,9 @@
                 <td><span data-bind="text: Title"></span></td>
                 <td><span data-bind="text: Artist"></span></td>
                 <td>
-                    @*                    <span data-bind="text: Duration.Hours"></span>h&nbsp;
-                    <span data-bind="text: Duration.Minutes"></span>m&nbsp;
-                    <span data-bind="text: Duration.Seconds"></span>s*@
+                    @*                    <span data-bind="text: Length.Hours"></span>h&nbsp;
+                    <span data-bind="text: Length.Minutes"></span>m&nbsp;
+                    <span data-bind="text: Length.Seconds"></span>s*@
                 </td>
             </tr>
         </tbody>

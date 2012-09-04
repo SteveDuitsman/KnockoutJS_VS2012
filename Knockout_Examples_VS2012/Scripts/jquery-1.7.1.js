@@ -8570,12 +8570,12 @@ jQuery.extend({
 		var opt = speed && typeof speed === "object" ? jQuery.extend( {}, speed ) : {
 			complete: fn || !fn && easing ||
 				jQuery.isFunction( speed ) && speed,
-			duration: speed,
+			Length: speed,
 			easing: fn && easing || easing && !jQuery.isFunction( easing ) && easing
 		};
 
-		opt.duration = jQuery.fx.off ? 0 : typeof opt.duration === "number" ? opt.duration :
-			opt.duration in jQuery.fx.speeds ? jQuery.fx.speeds[ opt.duration ] : jQuery.fx.speeds._default;
+		opt.Length = jQuery.fx.off ? 0 : typeof opt.Length === "number" ? opt.Length :
+			opt.Length in jQuery.fx.speeds ? jQuery.fx.speeds[ opt.Length ] : jQuery.fx.speeds._default;
 
 		// normalize opt.queue - true/undefined/null -> "fx"
 		if ( opt.queue == null || opt.queue === true ) {
@@ -8712,7 +8712,7 @@ jQuery.fx.prototype = {
 			elem = this.elem,
 			options = this.options;
 
-		if ( gotoEnd || t >= options.duration + this.startTime ) {
+		if ( gotoEnd || t >= options.Length + this.startTime ) {
 			this.now = this.end;
 			this.pos = this.state = 1;
 			this.update();
@@ -8764,15 +8764,15 @@ jQuery.fx.prototype = {
 			return false;
 
 		} else {
-			// classical easing cannot be used with an Infinity duration
-			if ( options.duration == Infinity ) {
+			// classical easing cannot be used with an Infinity Length
+			if ( options.Length == Infinity ) {
 				this.now = t;
 			} else {
 				n = t - this.startTime;
-				this.state = n / options.duration;
+				this.state = n / options.Length;
 
 				// Perform the easing function, defaults to swing
-				this.pos = jQuery.easing[ options.animatedProperties[this.prop] ]( this.state, n, 0, 1, options.duration );
+				this.pos = jQuery.easing[ options.animatedProperties[this.prop] ]( this.state, n, 0, 1, options.Length );
 				this.now = this.start + ( (this.end - this.start) * this.pos );
 			}
 			// Perform the next step of the animation

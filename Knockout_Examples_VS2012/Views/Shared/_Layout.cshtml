@@ -6,9 +6,10 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/Scripts/jquery-1.7.1.min.js")
-    @Scripts.Render("~/Scripts/knockout-2.1.0.js")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/knockout")
 </head>
 <body>
     <header>
@@ -29,6 +30,7 @@
                         <li>@Html.ActionLink("Ajax", "Index", "AjaxBinding")</li>
                         <li>@Html.ActionLink("AjaxMapping", "SongList", "AjaxBinding")</li>
                         <li>@Html.ActionLink("AjaxSaving", "SavableSongList", "AjaxBinding")</li>
+                        <li>@Html.ActionLink("Custom Binding", "SavableSongListWithDuration", "AjaxBinding")</li>
                     </ul>
                 </nav>
             </div>

@@ -27,18 +27,23 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult SavableSongListWithDuration()
+        {
+            return View("SavableSongListWithLength");
+        }
+
         [HttpPost]
         public ActionResult SaveSongList(IEnumerable<Song> songs)
         {
-            var dummy = "line";
             return SavableSongList();
         }
 
         private IEnumerable<Song> songs = new List<Song> {
-            new Song { Id = 1, Title = "Mama Said Knock You Out", Artist = "LL Cool J"/*, Duration = new TimeSpan(0, 3, 49 )*/},
-            new Song { Id = 2, Title = "Rope", Artist = "Foo Fighters"/*,Duration = new TimeSpan(0, 4, 19 )*/},
-            new Song { Id = 3, Title = "The Chicken Dance", Artist = "Werner Thomas"/*,Duration = new TimeSpan(1, 3, 0 )*/},
-            new Song { Id = 4, Title = "It Is What It Is", Artist = "Melvin Sparks"/*,Duration = new TimeSpan(1, 3, 0 )*/}
+            new Song { Id = 1, Title = "Mama Said Knock You Out", Artist = "LL Cool J", Length = new TimeSpan(0, 3, 49 )},
+            new Song { Id = 2, Title = "Rope", Artist = "Foo Fighters", Length = new TimeSpan(0, 4, 19 )},
+            new Song { Id = 3, Title = "The Chicken Dance", Artist = "Werner Thomas", Length = new TimeSpan(1, 3, 0 )},
+            new Song { Id = 4, Title = "It Is What It Is", Artist = "Melvin Sparks", Length = new TimeSpan(0, 5, 40 )}
         };
 
         [HttpGet]

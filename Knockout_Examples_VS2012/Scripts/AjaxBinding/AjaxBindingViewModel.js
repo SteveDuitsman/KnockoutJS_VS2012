@@ -4,7 +4,7 @@
     self.Id = ko.observable();
     self.Title = ko.observable();
     self.Artist = ko.observable();
-    self.Duration = ko.observable();
+    self.Length = ko.observable();
 
     self.LoadSongs = function () {
         var songData = {};
@@ -17,7 +17,7 @@
             self.Id(first.Id);
             self.Title(first.Title);
             self.Artist(first.Artist);
-            self.Duration(first.Duration);
+            self.Length(first.Length);
         });
     };
 

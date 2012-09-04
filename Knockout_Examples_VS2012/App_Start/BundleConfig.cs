@@ -23,9 +23,18 @@ namespace MvcApplication1
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/knockout")
+                .Include("~/Scripts/knockout*")
+                .Include("~/Scripts/ko.customBindings/datePicker.js")
+                .Include("~/Scripts/ko.customBindings/timePicker.js")
+                .Include("~/Scripts/ko.customBindings/slideVisible.js")
+                .Include("~/Scripts/ko.customBindings/slider.js")
+            );
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+                        "~/Content/themes/base/jquery.ui.css",
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
                         "~/Content/themes/base/jquery.ui.selectable.css",
